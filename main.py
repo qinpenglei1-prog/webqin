@@ -30,9 +30,9 @@ with st.sidebar:
     st.header("📝 录入新客户")
     with st.form("add_customer_form", clear_on_submit=True):
         name = st.text_input("姓名", placeholder="例如：张三")
-        phone = st.text_input("电话", type="default") # 手机上输入数字方便点
-        company = st.text_input("车型/备注", placeholder="例如：奥迪A6") # 把公司改成车型更实用
-        status = st.selectbox("状态", ["潜在", "意向", "成交", "流失"]) # 缩短字数适配手机
+        phone = st.text_input("电话", type="default") 
+        company = st.text_input("车型/备注", placeholder="例如：奥迪A6") # 优化点：把公司改成车型
+        status = st.selectbox("状态", ["潜在", "意向", "成交", "流失"]) # 优化点：简化字数
         
         submitted = st.form_submit_button("保存", type="primary")
         if submitted:
@@ -42,8 +42,8 @@ with st.sidebar:
                     "电话": [phone],
                     "公司": [company],
                     "跟进状态": [status],
-                    "备注": [company], # 备注跟车型同步
-                    "添加日期": [pd.Timestamp.now().strftime('%m-%d')] # 日期只留月-日
+                    "备注": [company], 
+                    "添加日期": [pd.Timestamp.now().strftime('%m-%d')] 
                 })
                 df = pd.concat([df, new_data], ignore_index=True)
                 save_data(df)
@@ -90,17 +90,4 @@ else:
 # 只展示最核心的列，防止手机屏幕撑爆
 # 隐藏了 "添加日期" 和 "备注"，只看 姓名-电话-状态-车型
 st.dataframe(
-    show_df[["姓名", "电话", "公司", "跟进状态"]],
-    use_container_width=True,
-    hide_index=True,
-    column_config={
-        "姓名": st.column_config.TextColumn("姓名", width="small"),
-        "电话": st.column_config.TextColumn("电话", width="small"),
-        "公司": st.column_config.TextColumn("车型", width="small"),
-        "跟进状态": st.column_config.SelectboxColumn(
-            "状态", 
-            options=["潜在", "意向", "成交", "流失"],
-            width="small"
-        )
-    }
-)
+    show
