@@ -90,4 +90,17 @@ else:
 # 只展示最核心的列，防止手机屏幕撑爆
 # 隐藏了 "添加日期" 和 "备注"，只看 姓名-电话-状态-车型
 st.dataframe(
-    show
+    show_df[["姓名", "电话", "公司", "跟进状态"]],
+    use_container_width=True,
+    hide_index=True,
+    column_config={
+        "姓名": st.column_config.TextColumn("姓名", width="small"),
+        "电话": st.column_config.TextColumn("电话", width="small"),
+        "公司": st.column_config.TextColumn("车型", width="small"),
+        "跟进状态": st.column_config.SelectboxColumn(
+            "状态", 
+            options=["潜在", "意向", "成交", "流失"],
+            width="small"
+        )
+    }
+)
