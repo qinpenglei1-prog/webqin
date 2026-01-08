@@ -106,7 +106,7 @@ def logout():
 def main_system():
     # 侧边栏：用户信息
     with st.sidebar:
-        st.image("https://cdn-icons-png.flaticon.com/512/743/743007.png", width=80) # 模拟Logo
+        # 这里可以用 st.image("logo.png") 换成你的logo
         st.write(f"欢迎你，**{st.session_state['user_name']}**")
         if st.session_state['user_role'] == 'admin':
             st.info("身份：管理员 (BOSS)")
